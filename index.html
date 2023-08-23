@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>Guess a number between 1 and 10:</p>
+    <div>
+    <P>In this application you'll use JS to pick a random number between 1 and 10.  Once the number is chosen, the user can guess a number and your application will provide feedback, 'higher', 'lower' or Got it! in which case the user wins!</P>
+    </div>
+    <input type="number" id="userGuess">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="feedback"></p>
+    
+    <script>
+        const targetNumber = Math.floor(Math.random() * 10) + 1;
+        let numberOfGuesses = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            numberOfGuesses++;
+
+            if (userGuess === targetNumber) {
+                displayFeedback(`Congratulations! You guessed the correct number, which was ${targetNumber}, and it took you ${formatGuessCount(numberOfGuesses)}.`);
+            } else if (userGuess < targetNumber) {
+                displayFeedback('Higher');
+            } else {
+                displayFeedback('Lower');
+            }
+        }
+
+        function displayFeedback(message) {
+            document.getElementById('feedback').textContent = message;
+        }
+
+        function formatGuessCount(count) {
+            if (count === 1) {
+                return 'only one guess';
+            } else {
+                return `${count} guesses`;
+            }
+        }
+    </script>
+</body>
+</html>
